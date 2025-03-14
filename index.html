@@ -5,60 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le Mie Poesie e Racconti</title>
     <style>
+        /* Palette di colori */
+        :root {
+            --primary: #6d5dfc;
+            --primary-light: #8abdff;
+            --primary-dark: #5b0eeb;
+            --secondary: #ff7d3b;
+            --accent: #5ce1e6;
+            --text-dark: #2a2a2a;
+            --text-light: #f5f5f5;
+            --background: #f8f8ff;
+            --card-bg: #ffffff;
+            --section-bg-poesie: rgba(109, 93, 252, 0.05);
+            --section-bg-racconti: rgba(255, 125, 59, 0.05);
+            --section-bg-laboratori: rgba(92, 225, 230, 0.05);
+        }
+        
         /* Stili di base */
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+            color: var(--text-dark);
+            background-color: var(--background);
+            background-image: radial-gradient(var(--primary-light) 0.5px, transparent 0.5px), 
+                              radial-gradient(var(--primary-light) 0.5px, var(--background) 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
         }
+        
         header {
             margin-bottom: 40px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--text-light);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(109, 93, 252, 0.4);
         }
+        
         h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             font-weight: normal;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
+        
         h2 {
-            font-size: 1.8em;
+            font-size: 2em;
             margin-top: 40px;
             font-weight: normal;
-            color: #555;
+            color: var(--primary-dark);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 10px;
+            display: inline-block;
         }
+        
         nav {
             margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+        
         nav a {
-            margin: 0 10px;
-            color: #555;
+            padding: 10px 20px;
+            color: var(--text-light);
             text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
+        
         nav a:hover {
-            text-decoration: underline;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .poesia, .racconto {
+        
+        section {
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        #poesie {
+            background-color: var(--section-bg-poesie);
+            border-left: 5px solid var(--primary);
+        }
+        
+        #racconti {
+            background-color: var(--section-bg-racconti);
+            border-left: 5px solid var(--secondary);
+        }
+        
+        #laboratori {
+            background-color: var(--section-bg-laboratori);
+            border-left: 5px solid var(--accent);
+        }
+        
+        #chi-sono {
+            background-color: var(--card-bg);
+            border-left: 5px solid #a3a3a3;
+        }
+        
+        .poesia, .racconto, .laboratorio {
             margin: 30px 0;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 25px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
+        .poesia {
+            border-top: 4px solid var(--primary);
+        }
+        
+        .racconto {
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .laboratorio {
+            border-top: 4px solid var(--accent);
+        }
+        
+        .poesia:hover, .racconto:hover, .laboratorio:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: var(--text-dark);
+            margin-top: 0;
+        }
+        
         .data {
             font-style: italic;
             color: #888;
             font-size: 0.9em;
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            margin-bottom: 15px;
         }
+        
         footer {
             margin-top: 50px;
             text-align: center;
             font-size: 0.9em;
-            color: #888;
+            color: var(--text-dark);
             border-top: 1px solid #ddd;
             padding-top: 20px;
         }
@@ -66,70 +168,181 @@
         /* Stili per il pannello di amministrazione */
         #admin-panel {
             display: none;
-            background-color: #f0f0f0;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 30px;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
             border: 1px solid #ddd;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+        
         #login-form, #admin-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
+        
         #admin-actions {
             display: none;
         }
+        
         .form-group {
             display: flex;
             flex-direction: column;
             margin-bottom: 15px;
         }
+        
         label {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
+            color: var(--primary-dark);
         }
+        
         input, textarea, select {
-            padding: 8px;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             font-family: 'Georgia', serif;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
         }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.2);
+        }
+        
         textarea {
             min-height: 150px;
             resize: vertical;
+            line-height: 1.6;
         }
+        
         button {
-            padding: 10px 15px;
-            background-color: #4a4a4a;
-            color: white;
+            padding: 12px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-family: 'Georgia', serif;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--text-dark);
+        }
+        
         button:hover {
-            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
+        
         #admin-toggle {
             background: none;
-            border: none;
-            color: #888;
-            text-decoration: underline;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 30px;
+            padding: 8px 16px;
             cursor: pointer;
-            padding: 0;
             font-size: 0.9em;
-            margin-top: 10px;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto;
+            max-width: 200px;
         }
+        
+        #admin-toggle:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
         .error-message {
-            color: #d9534f;
+            color: #e74c3c;
             font-size: 0.9em;
             margin-top: 5px;
+            background-color: rgba(231, 76, 60, 0.1);
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #e74c3c;
         }
+        
         .success-message {
-            color: #5cb85c;
+            color: #27ae60;
             font-size: 0.9em;
             margin-top: 5px;
+            background-color: rgba(39, 174, 96, 0.1);
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #27ae60;
+        }
+        
+        /* Badge per tipo contenuto */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.75em;
+            border-radius: 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        .badge-poesia {
+            background-color: var(--primary-light);
+            color: var(--text-light);
+        }
+        
+        .badge-racconto {
+            background-color: var(--secondary);
+            color: var(--text-light);
+        }
+        
+        .badge-laboratorio {
+            background-color: var(--accent);
+            color: var(--text-dark);
+        }
+        
+        /* Layout a colonne responsive */
+        @media (min-width: 768px) {
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+        }
+        
+        /* Media query per dispositivi mobili */
+        @media (max-width: 767px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 10px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            section {
+                padding: 20px 15px;
+            }
+            
+            .poesia, .racconto, .laboratorio {
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
@@ -139,15 +352,16 @@
         <nav>
             <a href="#poesie">Poesie</a>
             <a href="#racconti">Racconti</a>
+            <a href="#laboratori">Laboratori</a>
             <a href="#chi-sono">Chi Sono</a>
         </nav>
     </header>
 
     <main>
         <section id="poesie">
-            <h2>Poesie</h2>
+            <h2>Poesie <span class="badge badge-poesia">Versi</span></h2>
             <!-- Le poesie verranno inserite qui -->
-            <div id="poesie-container">
+            <div id="poesie-container" class="grid-container">
                 <article class="poesia">
                     <h3>Alba d'Estate</h3>
                     <p class="data">15 Giugno 2023</p>
@@ -158,265 +372,3 @@
                         gli uccelli cominciano a cantare.<br>
                         <br>
                         La città si sveglia,<br>
-                        mentre la rugiada brilla sull'erba.<br>
-                        Un nuovo giorno è nato,<br>
-                        con tutte le sue promesse.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <section id="racconti">
-            <h2>Racconti</h2>
-            <!-- I racconti verranno inseriti qui -->
-            <div id="racconti-container">
-                <article class="racconto">
-                    <h3>Il Vecchio del Lago</h3>
-                    <p class="data">22 Maggio 2023</p>
-                    <p>
-                        Era una mattina nebbiosa quando lo vidi per la prima volta. Seduto sulla riva del lago, con la sua canna da pesca e un vecchio cappello di paglia. Nessuno in paese sapeva da dove fosse venuto, né quando avesse deciso di stabilirsi in quella piccola capanna ai margini del bosco...
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <section id="chi-sono">
-            <h2>Chi Sono</h2>
-            <p>
-                Benvenuti nel mio piccolo angolo di internet. Scrivo per passione e per necessità, per dare voce ai pensieri che altrimenti rimarrebbero intrappolati nella mia mente. Attraverso poesie e racconti, esploro le emozioni umane e le piccole meraviglie quotidiane che spesso passiamo senza notare.
-            </p>
-            <p>
-                Se volete contattarmi, potete scrivermi all'indirizzo: <a href="mailto:esempio@email.com">esempio@email.com</a>
-            </p>
-        </section>
-        
-        <!-- Pulsante per accedere al pannello admin -->
-        <div style="text-align: center;">
-            <button id="admin-toggle">Accesso Amministratore</button>
-        </div>
-        
-        <!-- Pannello amministrativo nascosto -->
-        <section id="admin-panel">
-            <h2>Pannello Amministrativo</h2>
-            
-            <!-- Form di login -->
-            <div id="login-form">
-                <div class="form-group">
-                    <label for="username">Nome utente:</label>
-                    <input type="text" id="username" placeholder="Inserisci il tuo nome utente">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" placeholder="Inserisci la tua password">
-                </div>
-                <button id="login-button">Accedi</button>
-                <p id="login-error" class="error-message"></p>
-            </div>
-            
-            <!-- Pannello dopo il login -->
-            <div id="admin-actions">
-                <div class="form-group">
-                    <label for="content-type">Tipo di contenuto:</label>
-                    <select id="content-type">
-                        <option value="poesia">Poesia</option>
-                        <option value="racconto">Racconto</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="content-title">Titolo:</label>
-                    <input type="text" id="content-title" placeholder="Inserisci il titolo">
-                </div>
-                <div class="form-group">
-                    <label for="content-date">Data:</label>
-                    <input type="date" id="content-date">
-                </div>
-                <div class="form-group">
-                    <label for="content-text">Testo:</label>
-                    <textarea id="content-text" placeholder="Inserisci il testo (usa <br> per andare a capo nelle poesie)"></textarea>
-                </div>
-                <button id="publish-button">Pubblica</button>
-                <button id="logout-button">Esci</button>
-                <p id="publish-message"></p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2023-2025 Le Mie Poesie e Racconti. Tutti i diritti riservati.</p>
-    </footer>
-
-    <script>
-        // ========================
-        // CONFIGURAZIONE
-        // ========================
-        // IMPORTANTE: Modifica queste credenziali prima di pubblicare il sito
-        const ADMIN_USERNAME = "admin";
-        const ADMIN_PASSWORD = "password123";
-        
-        // Seleziona elementi DOM
-        const adminToggle = document.getElementById('admin-toggle');
-        const adminPanel = document.getElementById('admin-panel');
-        const loginForm = document.getElementById('login-form');
-        const adminActions = document.getElementById('admin-actions');
-        const loginButton = document.getElementById('login-button');
-        const logoutButton = document.getElementById('logout-button');
-        const publishButton = document.getElementById('publish-button');
-        const loginError = document.getElementById('login-error');
-        const publishMessage = document.getElementById('publish-message');
-        
-        // Contenitori delle poesie e racconti
-        const poesieContainer = document.getElementById('poesie-container');
-        const raccontiContainer = document.getElementById('racconti-container');
-        
-        // ========================
-        // GESTIONE LOCAL STORAGE
-        // ========================
-        
-        // Carica i contenuti dal localStorage
-        function loadContents() {
-            // Carica poesie
-            let poesie = JSON.parse(localStorage.getItem('poesie')) || [];
-            // Carica racconti
-            let racconti = JSON.parse(localStorage.getItem('racconti')) || [];
-            
-            return { poesie, racconti };
-        }
-        
-        // Salva i contenuti nel localStorage
-        function saveContents(poesie, racconti) {
-            localStorage.setItem('poesie', JSON.stringify(poesie));
-            localStorage.setItem('racconti', JSON.stringify(racconti));
-        }
-        
-        // Renderizza i contenuti sulla pagina
-        function renderContents() {
-            const { poesie, racconti } = loadContents();
-            
-            // Renderizza poesie
-            let poesieHTML = '';
-            poesie.forEach(poesia => {
-                poesieHTML += `
-                <article class="poesia">
-                    <h3>${poesia.titolo}</h3>
-                    <p class="data">${formatDate(poesia.data)}</p>
-                    <p>${poesia.testo}</p>
-                </article>
-                `;
-            });
-            
-            // Aggiungi le poesie salvate al container
-            if (poesieHTML) {
-                poesieContainer.innerHTML = poesieHTML;
-            }
-            
-            // Renderizza racconti
-            let raccontiHTML = '';
-            racconti.forEach(racconto => {
-                raccontiHTML += `
-                <article class="racconto">
-                    <h3>${racconto.titolo}</h3>
-                    <p class="data">${formatDate(racconto.data)}</p>
-                    <p>${racconto.testo}</p>
-                </article>
-                `;
-            });
-            
-            // Aggiungi i racconti salvati al container
-            if (raccontiHTML) {
-                raccontiContainer.innerHTML = raccontiHTML;
-            }
-        }
-        
-        // Formatta la data
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('it-IT', options);
-        }
-        
-        // ========================
-        // GESTIONE EVENTI
-        // ========================
-        
-        // Mostra/nascondi il pannello admin
-        adminToggle.addEventListener('click', () => {
-            adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
-        });
-        
-        // Login
-        loginButton.addEventListener('click', () => {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-                loginForm.style.display = 'none';
-                adminActions.style.display = 'block';
-                loginError.textContent = '';
-                // Imposta la data di oggi di default
-                document.getElementById('content-date').valueAsDate = new Date();
-            } else {
-                loginError.textContent = 'Nome utente o password non validi!';
-            }
-        });
-        
-        // Logout
-        logoutButton.addEventListener('click', () => {
-            loginForm.style.display = 'flex';
-            adminActions.style.display = 'none';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-        });
-        
-        // Pubblica nuovo contenuto
-        publishButton.addEventListener('click', () => {
-            const contentType = document.getElementById('content-type').value;
-            const title = document.getElementById('content-title').value;
-            const date = document.getElementById('content-date').value;
-            const text = document.getElementById('content-text').value;
-            
-            if (!title || !date || !text) {
-                publishMessage.textContent = 'Compila tutti i campi!';
-                publishMessage.className = 'error-message';
-                return;
-            }
-            
-            // Carica i contenuti esistenti
-            const { poesie, racconti } = loadContents();
-            
-            // Crea il nuovo elemento
-            const newItem = {
-                titolo: title,
-                data: date,
-                testo: text
-            };
-            
-            // Aggiungi il nuovo elemento all'array appropriato
-            if (contentType === 'poesia') {
-                poesie.unshift(newItem); // Aggiungi all'inizio dell'array
-            } else {
-                racconti.unshift(newItem);
-            }
-            
-            // Salva i contenuti aggiornati
-            saveContents(poesie, racconti);
-            
-            // Aggiorna la visualizzazione
-            renderContents();
-            
-            // Resetta il form
-            document.getElementById('content-title').value = '';
-            document.getElementById('content-text').value = '';
-            document.getElementById('content-date').valueAsDate = new Date();
-            
-            // Mostra messaggio di successo
-            publishMessage.textContent = 'Contenuto pubblicato con successo!';
-            publishMessage.className = 'success-message';
-            
-            // Scroll alla sezione appropriata
-            document.getElementById(contentType === 'poesia' ? 'poesie' : 'racconti').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        // Carica i contenuti al caricamento della pagina
-        document.addEventListener('DOMContentLoaded', renderContents);
-    </script>
-</body>
-</html>
